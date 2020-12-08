@@ -1,0 +1,47 @@
+version: "2.0"
+
+stories:
+  - story: list matchups, no skip
+    steps:
+      - intent: list_matchups
+      - action: matchups_form
+      - active_loop: matchups_form
+      - active_loop: null
+      - action: action_list_matchups
+      - slot_was_set:
+          - hero: null
+
+  - story: list matchups, skip hero
+    steps:
+      - intent: list_matchups
+        entities:
+          - hero: antimage
+      - action: matchups_form
+      - active_loop: matchups_form
+      - active_loop: null
+      - action: action_list_matchups
+      - slot_was_set:
+          - hero: null
+
+  # - story: loop
+  #   steps:
+  #     - intent: greet
+  #     - action: utter_greet
+  #     - intent: list_matchups
+  #       entities:
+  #         - hero: antimage
+  #     - action: matchups_form
+  #     - active_loop: matchups_form
+  #     - active_loop: null
+  #     - action: action_list_matchups
+  #     - slot_was_set:
+  #         - hero: null
+  #     - intent: list_matchups
+  #       entities:
+  #         - hero: antimage
+  #     - action: matchups_form
+  #     - active_loop: matchups_form
+  #     - active_loop: null
+  #     - action: action_list_matchups
+  #     - slot_was_set:
+  #         - hero: null

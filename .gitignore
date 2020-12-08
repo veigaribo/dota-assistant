@@ -1,0 +1,9 @@
+.env
+.vscode
+
+credentials.yml
+graph.html
+models/
+results/
+
+__pycache__/

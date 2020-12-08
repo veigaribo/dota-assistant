@@ -1,0 +1,49 @@
+version: "2.0"
+
+intents:
+  # general
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - bot_challenge
+
+  # ad-hoc
+  - list_matchups
+
+entities:
+  - hero
+
+responses:
+  utter_greet:
+    - text: "dale"
+
+  utter_goodbye:
+    - text: "flw"
+
+  utter_iamabot:
+    - text: "n sei"
+
+  utter_default:
+    - text: "n entendi 🤔"
+
+  utter_ask_matchups_form_hero:
+    - text: "contra quem?"
+
+slots:
+  hero:
+    type: text
+    influence_conversation: false
+
+forms:
+  matchups_form:
+    hero:
+      - type: from_entity
+        entity: hero
+
+actions:
+  - action_list_matchups
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

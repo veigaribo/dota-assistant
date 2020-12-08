@@ -1,0 +1,221 @@
+version: "2.0"
+
+nlu:
+  # general
+
+  - intent: greet
+    examples: |
+      - hey
+      - hello
+      - oi
+      - opa
+      - bom dia
+      - boa tarde
+      - dale
+      - eae
+      - e ai
+      - salve
+      - opa, tudo bem?
+      - oi, como vai?
+      - tudo bem?
+
+  - intent: goodbye
+    examples: |
+      - boa noite
+      - até mais
+      - nos vemos
+      - até
+      - falou
+      - tchau
+      - é nois
+      - valeu
+      - vlw
+      - flw
+      - é isso
+
+  - intent: affirm
+    examples: |
+      - sim
+      - s
+      - certo
+      - com certeza
+      - pode ser
+      - correto
+      - vai fundo
+      - quero
+
+  - intent: deny
+    examples: |
+      - não
+      - n
+      - nop
+      - de forma alguma
+      - jamais
+      - cancela
+
+  - intent: bot_challenge
+    examples: |
+      - és um bot?
+      - vc é um humano?
+      - estou eu a falar com uma máquina?
+      - eu to falando com uma pessoa?
+
+  - intent: nlu_fallback
+    examples: |
+      - chouriço
+      - kkkkk wtf
+
+  ## ad-hoc
+
+  - intent: list_matchups
+    examples: |
+      - quem é bom contra [kunkka](hero:kunkka)?
+      - como eu lido com um [storm](hero:stormspirit)?
+      - o que escolher contra [invoker](hero:invoker)
+      - sugestões contra [yurnero](hero:juggernaut)
+      - counters de [windranger](hero:windrunner)
+      - como ganhar de um [witch doctor](hero:witchdoctor)
+      - inimigo pegou [leshrac](hero:leshrac)
+      - estou enfrentando uma [akasha](hero:queenofpain)
+      - quem utilizar versus [enchantress](hero:enchantress)
+      - qq eu pego contra [axe](hero:axe)?
+
+  - lookup: hero
+    examples: |
+      - antimage
+      - anti mage
+      - anti-mage
+      - magina
+
+      - axe
+      - mogul
+      - khan
+
+      - bane
+      - bloodseeker
+      - crystalmaiden
+      - drowranger
+      - earthshaker
+      - juggernaut
+      - mirana
+      - nevermore
+      - morphling
+      - phantomlancer
+      - puck
+      - pudge
+      - razor
+      - sandking
+      - stormspirit
+      - sven
+      - tiny
+      - vengefulspirit
+      - windrunner
+      - zuus
+      - kunkka
+      - lina
+      - lich
+      - lion
+      - shadowshaman
+      - slardar
+      - tidehunter
+      - witchdoctor
+      - riki
+      - enigma
+      - tinker
+      - sniper
+      - necrolyte
+      - warlock
+      - beastmaster
+      - queenofpain
+      - venomancer
+      - facelessvoid
+      - skeletonking
+      - deathprophet
+      - phantomassassin
+      - pugna
+      - templarassassin
+      - viper
+      - luna
+      - dragonknight
+      - dazzle
+      - rattletrap
+      - leshrac
+      - furion
+      - lifestealer
+      - darkseer
+      - clinkz
+      - omniknight
+      - enchantress
+      - huskar
+      - nightstalker
+      - broodmother
+      - bountyhunter
+      - weaver
+      - jakiro
+      - batrider
+      - chen
+      - spectre
+      - doombringer
+      - ancientapparition
+      - ursa
+      - spiritbreaker
+      - gyrocopter
+      - alchemist
+      - invoker
+      - silencer
+      - obsidiandestroyer
+      - lycan
+      - brewmaster
+      - shadowdemon
+      - lonedruid
+      - chaosknight
+      - meepo
+      - treant
+      - ogremagi
+      - undying
+      - rubick
+      - disruptor
+      - nyxassassin
+      - nagasiren
+      - keeperofthelight
+      - wisp
+      - visage
+      - slark
+      - medusa
+      - trollwarlord
+      - centaur
+      - magnataur
+      - shredder
+      - bristleback
+      - tusk
+      - skywrathmage
+      - abaddon
+      - eldertitan
+      - legioncommander
+      - emberspirit
+      - earthspirit
+      - abyssalunderlord
+      - terrorblade
+      - phoenix
+      - techies
+      - winterwyvern
+      - arcwarden
+      - monkeyking
+      - darkwillow
+      - pangolier
+      - grimstroke
+      - oracle
+      - mars
+      - snapfire
+      - voidspirit
+
+  - synonym: antimage
+    examples: |
+      - anti mage
+      - anti-mage
+      - magina
+
+  - synonym: axe
+    examples: |
+      - mogul
+      - khan

@@ -1,0 +1,17 @@
+version: "2.0"
+
+rules:
+  - rule: Greet
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Bot challenge
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
