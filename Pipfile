@@ -11,7 +11,3 @@ autopep8 = "*"
 python_version = "3.8"
 
 [packages]
-spacy = "==2.3.4"
-requests = "*"
-pandas = "*"
-rasa = "*"
