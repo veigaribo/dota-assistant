@@ -60,13 +60,13 @@ rasa:
 
 Also, you will need Duckling running and accessible at `localhost:8000` (probably the easiest option to do that would be to run it using Docker)
 
-Then, you will probably want to train the bot:
+Then, the bot must be trained:
 
 ```bash
 rasa train
 ```
 
-> If there `rasa` command isn't available in your PATH, you may need to use `python -m rasa` instead
+> If the `rasa` command isn't available in your PATH, you may use `python -m rasa` instead
 
 And you should be able to start talking with:
 
