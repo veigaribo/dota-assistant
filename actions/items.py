@@ -50,10 +50,14 @@ class ActionListItems(Action):
         data: ItemPopularity = res.json()
         data_pd = pd.DataFrame(data).fillna(0)
 
-        start_items = data_pd['start_game_items'].nlargest(8).transpose()
-        early_items = data_pd['early_game_items'].nlargest(8).transpose()
-        mid_items = data_pd['mid_game_items'].nlargest(8).transpose()
-        late_items = data_pd['late_game_items'].nlargest(8).transpose()
+        def get_largest(series):
+            with_zeroes = series.nlargest(8)
+            return with_zeroes[with_zeroes != 0.0].transpose()
+
+        start_items = get_largest(data_pd['start_game_items'])
+        early_items = get_largest(data_pd['early_game_items'])
+        mid_items = get_largest(data_pd['mid_game_items'])
+        late_items = get_largest(data_pd['late_game_items'])
 
         message = '\n'.join([
             f'itens iniciais:\n\n{ ActionListItems.format_items(start_items) }',
