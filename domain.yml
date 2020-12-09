@@ -10,6 +10,7 @@ intents:
 
   # ad-hoc
   - list_matchups
+  - list_items
 
 entities:
   - hero
@@ -30,6 +31,9 @@ responses:
   utter_ask_matchups_form_hero:
     - text: "contra quem?"
 
+  utter_ask_items_form_hero:
+    - text: "pra quem?"
+
 slots:
   hero:
     type: text
@@ -41,8 +45,14 @@ forms:
       - type: from_entity
         entity: hero
 
+  items_form:
+    hero:
+      - type: from_entity
+        entity: hero
+
 actions:
   - action_list_matchups
+  - action_list_items
 
 session_config:
   session_expiration_time: 60

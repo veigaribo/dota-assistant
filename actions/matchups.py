@@ -7,8 +7,7 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
-import json
-from typing import Any, Text, Dict, List, Union
+from typing import Any, Text, Dict, List, Union, TypedDict
 
 import pandas as pd
 from rasa_sdk import Action, Tracker
@@ -17,16 +16,13 @@ from rasa_sdk.executor import CollectingDispatcher
 import requests
 
 from .data.config import SIGNIFICATIVE_MATCHUP_MIN_MATCHES
-from .data.heroes import Hero
-from .data.matchups import Matchup
+from .data.heroes import heroes_by_id, heroes_by_name
 
-with open('./actions/data/heroes.json') as heroes_file:
-    heroes_content = heroes_file.read()
-    heroes: List[Hero] = json.loads(heroes_content)
 
-# slicing at 14 to strip the "npc_dota_hero_"
-heroes_by_name = {hero['name'][14:].replace('_', ''): hero for hero in heroes}
-heroes_by_id = {hero['id']: hero for hero in heroes}
+class Matchup(TypedDict):
+    hero_id: int
+    games_played: int
+    wins: int
 
 
 class ActionListMatchups(Action):
@@ -64,19 +60,24 @@ class ActionListMatchups(Action):
 
         top_win_percentages_transposed = top_win_percentages.transpose()
 
-        message = 'tu pode pegar:\n\n' + \
-            '\n'.join([ActionListMatchups.format_win_percentage(i, top_win_percentages_transposed[i])
-                       for i in range(len(top_win_percentages))])
+        message = f'tu pode pegar:\n\n{ActionListMatchups.format_matchups(top_win_percentages_transposed)}'
 
         dispatcher.utter_message(text=message)
 
         return [SlotSet('hero', None)]
 
     @staticmethod
-    def format_win_percentage(i: int, win_percentage):
-        hero_name = heroes_by_id[win_percentage['hero_id']]['localized_name']
-        win_rate = win_percentage['win_percentage']
-        wins = win_percentage['wins']
-        games_played = win_percentage['games_played']
+    def format_matchups(matchups_with_win_percentages):
+        return '\n'.join([ActionListMatchups.format_matchup(i, matchups_with_win_percentages[i])
+                          for i in range(len(matchups_with_win_percentages))])
+
+    @staticmethod
+    def format_matchup(i: int, matchup_with_win_percentage):
+        hero_name = heroes_by_id[matchup_with_win_percentage['hero_id']
+                                 ]['localized_name']
+
+        win_rate = matchup_with_win_percentage['win_percentage']
+        wins = matchup_with_win_percentage['wins']
+        games_played = matchup_with_win_percentage['games_played']
 
         return f'{ str(i + 1) } - { hero_name }: { str(win_rate * 100) }% win rate ({ str(games_played) } partidas, { str(wins) } vitórias)'

@@ -80,6 +80,15 @@ nlu:
       - quem utilizar versus [enchantress](hero:enchantress)
       - qq eu pego contra [axe](hero:axe)?
 
+  - intent: list_items
+    examples: |
+      - o que eu faço pra [templarassassin](hero:templarassassin)?
+      - o que builda pra [nyxassassin](hero:nyxassassin)?
+      - [mirana](hero:mirana) faz que itens?
+      - qq eu compro pra [earthshaker](hero:earthshaker)?
+      - itens para [nevermore](hero:nevermore)
+      - build [puck](hero:puck)
+
   - lookup: hero
     examples: |
       - antimage

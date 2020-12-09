@@ -22,3 +22,25 @@ stories:
       - action: action_list_matchups
       - slot_was_set:
           - hero: null
+
+  - story: list items, no skip
+    steps:
+      - intent: list_items
+      - action: items_form
+      - active_loop: items_form
+      - active_loop: null
+      - action: action_list_items
+      - slot_was_set:
+          - hero: null
+
+  - story: list items, skip hero
+    steps:
+      - intent: list_items
+        entities:
+          - hero: antimage
+      - action: items_form
+      - active_loop: items_form
+      - active_loop: null
+      - action: action_list_items
+      - slot_was_set:
+          - hero: null
