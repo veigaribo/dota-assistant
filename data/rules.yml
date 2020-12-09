@@ -15,3 +15,27 @@ rules:
     steps:
       - intent: bot_challenge
       - action: utter_iamabot
+
+  - rule: list matchups (deactivate)
+    condition:
+      - active_loop: restaurant_form
+    steps:
+      - action: matchups_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_list_matchups
+      - slot_was_set:
+          - hero: null
+
+  - rule: list items (deactivate)
+    condition:
+      - active_loop: items_form
+    steps:
+      - action: items_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_list_items
+      - slot_was_set:
+          - hero: null

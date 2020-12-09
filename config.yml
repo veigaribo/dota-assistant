@@ -42,7 +42,7 @@ policies:
   # # No configuration for policies was provided. The following default policies were used to train your model.
   # # If you'd like to customize them, uncomment and adjust the policies.
   # # See https://rasa.com/docs/rasa/policies for more information.
-  - name: MemoizationPolicy
+  - name: AugmentedMemoizationPolicy
   - name: TEDPolicy
     max_history: 24
     epochs: 100

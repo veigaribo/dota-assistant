@@ -1,46 +1,30 @@
 version: "2.0"
 
 stories:
-  - story: list matchups, no skip
+  - story: list matchups, no skip (activate)
     steps:
       - intent: list_matchups
       - action: matchups_form
       - active_loop: matchups_form
-      - active_loop: null
-      - action: action_list_matchups
-      - slot_was_set:
-          - hero: null
 
-  - story: list matchups, skip hero
+  - story: list matchups, skip hero (activate)
     steps:
       - intent: list_matchups
         entities:
           - hero: antimage
       - action: matchups_form
       - active_loop: matchups_form
-      - active_loop: null
-      - action: action_list_matchups
-      - slot_was_set:
-          - hero: null
 
-  - story: list items, no skip
+  - story: list items, no skip (activate)
     steps:
       - intent: list_items
       - action: items_form
       - active_loop: items_form
-      - active_loop: null
-      - action: action_list_items
-      - slot_was_set:
-          - hero: null
 
-  - story: list items, skip hero
+  - story: list items, skip hero (activate)
     steps:
       - intent: list_items
         entities:
           - hero: antimage
       - action: items_form
       - active_loop: items_form
-      - active_loop: null
-      - action: action_list_items
-      - slot_was_set:
-          - hero: null
