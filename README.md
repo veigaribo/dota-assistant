@@ -74,7 +74,7 @@ And you should be able to start talking with:
 rasa shell
 ```
 
-However, it is very possible that the delay caused by OpenDota will be enough to sometimes trigger a timeout by default; so, you will probably want to set the `RASA_SHELL_STREAM_READING_TIMEOUT_IN_SECONDS` environment value to a numeric value bigger than 20.
+However, it is very possible that the delay caused by OpenDota will be enough to sometimes trigger a timeout by default; so, you will probably want to set the `RASA_SHELL_STREAM_READING_TIMEOUT_IN_SECONDS` environment variable to a numeric value bigger than 20.
 
 How to do it depends on your shell. In Bash, it would be:
 
