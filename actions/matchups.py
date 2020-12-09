@@ -12,10 +12,11 @@ from typing import Any, Text, Dict, List, Union
 
 import pandas as pd
 from rasa_sdk import Action, Tracker
-from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
+from rasa_sdk.executor import CollectingDispatcher
 import requests
 
+from .data.config import SIGNIFICATIVE_MATCHUP_MIN_MATCHES
 from .data.heroes import Hero
 from .data.matchups import Matchup
 
@@ -52,8 +53,11 @@ class ActionListMatchups(Action):
         data: List[Matchup] = res.json()
         data_pd = pd.DataFrame(data)
 
-        win_percentages = data_pd.assign(
-            win_percentage=(1.0 - data_pd['wins'] / data_pd['games_played']))
+        significant_matchups = data_pd[data_pd['games_played']
+                                       >= SIGNIFICATIVE_MATCHUP_MIN_MATCHES]
+
+        win_percentages = significant_matchups.assign(
+            win_percentage=(1.0 - significant_matchups['wins'] / significant_matchups['games_played']))
 
         top_win_percentages = win_percentages.nlargest(
             5, 'win_percentage').reset_index()
