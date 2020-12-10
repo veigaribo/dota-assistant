@@ -1,13 +1,4 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/custom-actions
-
-
-# This is a simple example for a custom action which utters "Hello World!"
-
-from typing import Any, Text, Dict, List, Union, TypedDict
+from typing import Any, Dict, List, Text, TypedDict, Union
 
 import pandas as pd
 from rasa_sdk import Action, Tracker
@@ -17,6 +8,7 @@ import requests
 
 from .data.config import SIGNIFICATIVE_MATCHUP_MIN_MATCHES
 from .data.heroes import heroes_by_id, heroes_by_name
+from .utils import first_item_or_id
 
 
 class Matchup(TypedDict):
@@ -26,7 +18,6 @@ class Matchup(TypedDict):
 
 
 class ActionListMatchups(Action):
-
     def name(self) -> Text:
         return "action_list_matchups"
 
@@ -37,8 +28,7 @@ class ActionListMatchups(Action):
         hero_slot_value: Union[str, List[str]] = tracker.get_slot('hero')
 
         # if its a list, use the first element
-        hero_name: str = hero_slot_value if not isinstance(
-            hero_slot_value, list) else hero_slot_value[0]
+        hero_name: str = first_item_or_id(hero_slot_value)
 
         hero = heroes_by_name[hero_name]
         hero_id = hero['id']
@@ -68,8 +58,8 @@ class ActionListMatchups(Action):
 
     @staticmethod
     def format_matchups(matchups_with_win_percentages):
-        return '\n'.join([ActionListMatchups.format_matchup(i, matchups_with_win_percentages[i])
-                          for i in range(len(matchups_with_win_percentages))])
+        return '\n'.join([ActionListMatchups.format_matchup(i, matchup)
+                          for i, matchup in matchups_with_win_percentages.items()])
 
     @staticmethod
     def format_matchup(i: int, matchup_with_win_percentage):
@@ -80,4 +70,4 @@ class ActionListMatchups(Action):
         wins = matchup_with_win_percentage['wins']
         games_played = matchup_with_win_percentage['games_played']
 
-        return f'{ str(i + 1) } - { hero_name }: { str(win_rate * 100) }% win rate ({ str(games_played) } partidas, { str(wins) } vitórias)'
+        return f'{ str(i + 1) }. { hero_name }: { str(win_rate * 100) }% win rate ({ str(games_played) } partidas, { str(wins) } vitórias)'

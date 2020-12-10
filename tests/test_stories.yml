@@ -33,3 +33,37 @@ stories:
       - action: action_list_items
       - slot_was_set:
           - hero: null
+
+  - story: greet and list lanes by hero
+    steps:
+      - user: |
+          dale
+        intent: greet
+      - action: utter_greet
+      - user: |
+          onde que eu posso ir de [magina](hero:antimage)?
+        intent: list_lanes
+      - action: lanes_form
+      - active_loop: lanes_form
+      - active_loop: null
+      - action: action_list_lanes
+      - slot_was_set:
+          - hero: null
+          - lane: null
+
+  - story: greet and list heroes by lane
+    steps:
+      - user: |
+          dale
+        intent: greet
+      - action: utter_greet
+      - user: |
+          o que eu posso pegar no [mid](lane:mid)?
+        intent: list_lanes
+      - action: lanes_form
+      - active_loop: lanes_form
+      - active_loop: null
+      - action: action_list_lanes
+      - slot_was_set:
+          - hero: null
+          - lane: null

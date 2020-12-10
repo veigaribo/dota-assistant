@@ -23,12 +23,12 @@ pipeline:
     entity_recognition: false
     epochs: 100
   - name: RegexEntityExtractor
-  - name: DucklingEntityExtractor
-    url: "http://localhost:8000"
-    dimensions: []
-    locale: pt_BR
-    timezone: America/Sao_Paulo
-    timeout: 5
+  #- name: DucklingEntityExtractor
+  #  url: "http://localhost:8000"
+  #  dimensions: []
+  #  locale: pt_BR
+  #  timezone: America/Sao_Paulo
+  #  timeout: 5
   - name: EntitySynonymMapper
   - name: ResponseSelector
     epochs: 100

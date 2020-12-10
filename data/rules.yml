@@ -39,3 +39,16 @@ rules:
       - action: action_list_items
       - slot_was_set:
           - hero: null
+
+  - rule: list lanes (deactivate)
+    condition:
+      - active_loop: lanes_form
+    steps:
+      - action: lanes_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_list_lanes
+      - slot_was_set:
+          - hero: null
+          - lane: null

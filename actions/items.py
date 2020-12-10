@@ -1,13 +1,4 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/custom-actions
-
-
-# This is a simple example for a custom action which utters "Hello World!"
-
-from typing import Any, Text, Dict, List, Union, TypedDict
+from typing import Any, Dict, List, Text, TypedDict, Union
 
 import pandas as pd
 from rasa_sdk import Action, Tracker
@@ -15,8 +6,9 @@ from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 import requests
 
-from .data.heroes import heroes_by_id, heroes_by_name
+from .data.heroes import heroes_by_name
 from .data.items import items_by_id
+from .utils import first_item_or_id
 
 
 class ItemPopularity(TypedDict):
@@ -27,7 +19,6 @@ class ItemPopularity(TypedDict):
 
 
 class ActionListItems(Action):
-
     def name(self) -> Text:
         return "action_list_items"
 
@@ -38,8 +29,7 @@ class ActionListItems(Action):
         hero_slot_value: Union[str, List[str]] = tracker.get_slot('hero')
 
         # if its a list, use the first element
-        hero_name: str = hero_slot_value if not isinstance(
-            hero_slot_value, list) else hero_slot_value[0]
+        hero_name: str = first_item_or_id(hero_slot_value)
 
         hero = heroes_by_name[hero_name]
         hero_id = hero['id']

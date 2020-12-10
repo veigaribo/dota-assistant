@@ -58,8 +58,6 @@ rasa:
   url: "http://localhost:5002/api"
 ```
 
-Also, you will need Duckling running and accessible at `localhost:8000` (probably the easiest option to do that would be to run it using Docker)
-
 Then, the bot must be trained:
 
 ```bash

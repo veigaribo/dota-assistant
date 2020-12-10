@@ -14,6 +14,7 @@ intents:
 
 entities:
   - hero
+  - lane
 
 responses:
   utter_greet:
@@ -34,8 +35,14 @@ responses:
   utter_ask_items_form_hero:
     - text: "pra quem?"
 
+  utter_ask_lanes_form_hero:
+    - text: "com quem?"
+
 slots:
   hero:
+    type: text
+    influence_conversation: false
+  lane:
     type: text
     influence_conversation: false
 
@@ -50,9 +57,19 @@ forms:
       - type: from_entity
         entity: hero
 
+  lanes_form:
+    hero:
+      - type: from_entity
+        entity: hero
+    lane:
+      - type: from_entity
+        entity: lane
+
 actions:
   - action_list_matchups
   - action_list_items
+  - action_list_lanes
+  - validate_lanes_form
 
 session_config:
   session_expiration_time: 60

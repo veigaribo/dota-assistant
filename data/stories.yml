@@ -28,3 +28,25 @@ stories:
           - hero: antimage
       - action: items_form
       - active_loop: items_form
+
+  - story: list lanes, no skip (activate)
+    steps:
+      - intent: list_lanes
+      - action: lanes_form
+      - active_loop: lanes_form
+
+  - story: list lanes, skip hero (activate)
+    steps:
+      - intent: list_lanes
+        entities:
+          - hero: antimage
+      - action: lanes_form
+      - active_loop: lanes_form
+
+  - story: list lanes, skip lane (activate)
+    steps:
+      - intent: list_lanes
+        entities:
+          - lane: mid
+      - action: lanes_form
+      - active_loop: lanes_form

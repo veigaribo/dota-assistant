@@ -89,6 +89,33 @@ nlu:
       - itens para [nevermore](hero:nevermore)
       - build [puck](hero:puck)
 
+  - intent: list_lanes
+    examples: |
+      - onde [bane](hero:bane) vai?
+      - em que lane [morphling](hero:morphling) geralmente vai?
+      - qual a posição do [zuus](hero:zuus)?
+      - lane [facelessvoid](hero:facelessvoid)
+      - onde que eu posso ir de [enchantress](hero:enchantress)?
+      - que bonecos são bons no [mid](lane:mid)?
+      - quem é bom na [safe](lane:safe)?
+      - qq eu pego na [off](lane:off)?
+      - [omniknight](hero:omniknight) é bom na [off](lane:off)?
+      - heróis para lane [mid](lane:mid)
+
+  - lookup: lane
+    examples: |
+      - off
+      - mid
+      - safe
+
+  - synonym: "off"
+    examples: |
+      - offlane
+
+  - synonym: safe
+    examples: |
+      - safelane
+
   - lookup: hero
     examples: |
       - antimage
