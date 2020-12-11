@@ -1,0 +1,31 @@
+version: "3"
+services:
+  rasa-actions:
+    container_name: rasa-actions
+    build:
+      context: "."
+      dockerfile: Dockerfile.actions
+    expose:
+      - "5055"
+    ports:
+      - "5055:5055"
+    restart: unless-stopped
+    environment: []
+  rasa-oss:
+    container_name: rasa-oss
+    build:
+      context: "."
+      dockerfile: Dockerfile.oss
+    depends_on:
+      - rasa-actions
+    expose:
+      - "5005"
+    ports:
+      - "5005:5005"
+    restart: unless-stopped
+    environment:
+      - RASA_X_URL=${RASA_X_URL}
+      - TELEGRAM_ACCESS_TOKEN=${TELEGRAM_ACCESS_TOKEN}
+      - TELEGRAM_VERIFY=${TELEGRAM_VERIFY}
+      - TELEGRAM_WEBHOOK_URL=${TELEGRAM_WEBHOOK_URL}
+      - ACTION_ENDPOINT_URL=http://rasa-actions:5055/webhook

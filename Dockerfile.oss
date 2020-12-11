@@ -58,4 +58,4 @@ EXPOSE 5005
 
 RUN rasa train
 
-CMD ["./scripts/run.sh"]
+CMD ["rasa", "run"]

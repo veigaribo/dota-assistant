@@ -1,9 +1,6 @@
 .env
 .vscode
 
-credentials.yml
-endpoints.yml
-
 graph.html
 models/
 results/
