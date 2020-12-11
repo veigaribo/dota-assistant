@@ -11,6 +11,7 @@ intents:
   # ad-hoc
   - list_matchups
   - list_items
+  - list_lanes
 
 entities:
   - hero
