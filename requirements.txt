@@ -1,5 +1,2 @@
-pandas==1.1.5
-rasa==2.1.3
-requests==2.25.0
-spacy==2.3.4
-rasa[spacy]
+-r ./requirements-oss.txt
+-r ./requirements-actions.txt

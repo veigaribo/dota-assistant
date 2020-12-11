@@ -1,0 +1,61 @@
+# adapted from https://hub.docker.com/r/rasa/rasa/dockerfile
+
+FROM python:3.8.6
+
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends \
+    # required by psycopg2 at build and runtime
+    libpq-dev \
+    # required for health check
+    curl \
+    && apt-get autoremove -y
+
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    wget \
+    openssh-client \
+    graphviz-dev \
+    pkg-config \
+    git-core \
+    openssl \
+    libssl-dev \
+    libffi6 \
+    libffi-dev \
+    libpng-dev
+
+# copy files
+COPY . /app/
+
+# change working directory
+WORKDIR /app
+
+# install dependencies
+RUN pip install --no-cache-dir -U pip==20.0.2 && \
+    pip install --no-cache-dir -U setuptools==51.0.0 && \
+    pip install --no-cache-dir -r requirements-oss.txt && \
+    mkdir /.config && mkdir /.cache
+
+# spacy link
+RUN python -m spacy download pt_core_news_md && \
+    python -m spacy link pt_core_news_md pt
+
+# update permissions & change user to not run as root
+RUN chgrp -R 0 /app && chmod -R g=u /app && \
+    chgrp -R 0 /.config && chmod -R g=u /.config && \
+    chgrp -R 0 /.cache && chmod -R g=u /.cache
+
+USER 1001
+
+# Create a volume for temporary data
+VOLUME /tmp
+
+# change shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# the entry point
+EXPOSE 5005
+
+RUN rasa train
+
+CMD ["./scripts/run.sh"]

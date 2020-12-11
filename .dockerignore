@@ -9,3 +9,5 @@ models/
 results/
 
 __pycache__/
+
+.ignore/
