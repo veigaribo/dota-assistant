@@ -10,7 +10,8 @@ services:
     ports:
       - "5055:5055"
     restart: unless-stopped
-    environment: []
+    environment:
+      - PORT=5055
   rasa-oss:
     container_name: rasa-oss
     build:
@@ -24,6 +25,7 @@ services:
       - "5005:5005"
     restart: unless-stopped
     environment:
+      - PORT=5005
       - RASA_X_URL=${RASA_X_URL}
       - TELEGRAM_ACCESS_TOKEN=${TELEGRAM_ACCESS_TOKEN}
       - TELEGRAM_VERIFY=${TELEGRAM_VERIFY}

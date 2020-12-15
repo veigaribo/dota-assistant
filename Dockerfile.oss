@@ -54,8 +54,8 @@ VOLUME /tmp
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # the entry point
-EXPOSE 5005
+EXPOSE $PORT
 
 RUN rasa train
 
-CMD ["rasa", "run"]
+CMD ["sh", "-c", "rasa run -p $PORT"]
