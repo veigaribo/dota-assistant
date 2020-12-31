@@ -60,7 +60,7 @@ class ActionListItems(Action):
 
         return [SlotSet('hero', None)]
 
-    @staticmethod
-    def format_items(items):
+    @classmethod
+    def format_items(cls, items):
         return '\n'.join([f'- { items_by_id[int(item_id)].get("dname") } (usado { str(quantity) } vezes)'
                           for item_id, quantity in items.items()])

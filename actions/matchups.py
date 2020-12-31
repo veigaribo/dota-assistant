@@ -56,13 +56,13 @@ class ActionListMatchups(Action):
 
         return [SlotSet('hero', None)]
 
-    @staticmethod
-    def format_matchups(matchups_with_win_percentages):
-        return '\n'.join([ActionListMatchups.format_matchup(i, matchup)
+    @classmethod
+    def format_matchups(cls, matchups_with_win_percentages):
+        return '\n'.join([cls.format_matchup(i, matchup)
                           for i, matchup in matchups_with_win_percentages.items()])
 
-    @staticmethod
-    def format_matchup(i: int, matchup_with_win_percentage):
+    @classmethod
+    def format_matchup(cls, i: int, matchup_with_win_percentage):
         hero_name = heroes_by_id[matchup_with_win_percentage['hero_id']
                                  ]['localized_name']
 

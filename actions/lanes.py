@@ -110,15 +110,15 @@ class ActionListLanes(Action):
 
         return [SlotSet('hero', None), SlotSet('lane', None)]
 
-    @staticmethod
-    def format_lanes_by_hero(lanes_roles):
+    @classmethod
+    def format_lanes_by_hero(cls, lanes_roles):
         hero_id = lanes_roles[0]['hero_id']
         hero = heroes_by_id[hero_id]
 
-        return f'lanes para { hero["localized_name"] }\n' + '\n'.join([ActionListLanes.format_lane_by_hero(i, lane_role) for i, lane_role in lanes_roles.items()])
+        return f'lanes para { hero["localized_name"] }\n' + '\n'.join([cls.format_lane_by_hero(i, lane_role) for i, lane_role in lanes_roles.items()])
 
-    @staticmethod
-    def format_lane_by_hero(i: int, lane_role):
+    @classmethod
+    def format_lane_by_hero(cls, i: int, lane_role):
         lane_id = lane_role['lane_role']
         lane = lanes_by_id[lane_id]
         lane_name = lane['dname']
@@ -128,15 +128,15 @@ class ActionListLanes(Action):
         return f'{ str(i + 1) }. { lane_name }. games: { str(games) }, wins: { str(wins) }' + \
             (f' ({ wins * 100 / games }%)' if games > 0 else '')
 
-    @staticmethod
-    def format_lanes_by_lane(lanes_roles):
+    @classmethod
+    def format_lanes_by_lane(cls, lanes_roles):
         lane_id = lanes_roles[0]['lane_role']
         lane = lanes_by_id[lane_id]
 
-        return f'herois para lane { lane["dname"] }\n' + '\n'.join([ActionListLanes.format_lane_by_lane(i, lane_role) for i, lane_role in lanes_roles.items()])
+        return f'herois para lane { lane["dname"] }\n' + '\n'.join([cls.format_lane_by_lane(i, lane_role) for i, lane_role in lanes_roles.items()])
 
-    @staticmethod
-    def format_lane_by_lane(i: int, lane_role):
+    @classmethod
+    def format_lane_by_lane(cls, i: int, lane_role):
         hero_id = lane_role['hero_id']
         hero = heroes_by_id[hero_id]
         hero_name = hero['localized_name']
