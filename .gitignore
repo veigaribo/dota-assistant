@@ -1,6 +1,8 @@
 .env
 .vscode
 
+venv/
+
 graph.html
 models/
 results/

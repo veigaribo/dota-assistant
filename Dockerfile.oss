@@ -34,6 +34,7 @@ WORKDIR /app
 RUN pip install --no-cache-dir -U pip==20.0.2 && \
     pip install --no-cache-dir -U setuptools==51.0.0 && \
     pip install --no-cache-dir -r requirements-oss.txt && \
+    pip install --no-cache-dir -U sanic==20.9.1 && \
     mkdir /.config && mkdir /.cache
 
 # spacy link

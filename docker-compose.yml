@@ -14,6 +14,7 @@ services:
       - PORT=5055
   rasa-oss:
     container_name: rasa-oss
+    command: rasa run --enable-api --cors='*' -p=5005
     build:
       context: "."
       dockerfile: Dockerfile.oss
