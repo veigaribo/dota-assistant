@@ -1,13 +1,14 @@
 FROM python:3.8.6
 
-COPY ./actions /app/actions
-COPY ./requirements-actions.txt /app/requirements-actions.txt
-
 WORKDIR /app
+
+COPY requirements-actions.txt ./
 
 USER root
 
 RUN pip install --no-cache-dir -r requirements-actions.txt
+
+COPY actions actions/
 
 USER 1001
 

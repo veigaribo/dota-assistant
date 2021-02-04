@@ -24,22 +24,26 @@ RUN apt-get update -qq && \
     libffi-dev \
     libpng-dev
 
-# copy files
-COPY . /app/
-
 # change working directory
 WORKDIR /app
+
+# copy dependencies
+COPY requirements-oss.txt ./
 
 # install dependencies
 RUN pip install --no-cache-dir -U pip==20.0.2 && \
     pip install --no-cache-dir -U setuptools==51.0.0 && \
     pip install --no-cache-dir -r requirements-oss.txt && \
     pip install --no-cache-dir -U sanic==20.9.1 && \
+    pip install --no-cache-dir -U numpy==1.19.5 && \
     mkdir /.config && mkdir /.cache
 
 # spacy link
 RUN python -m spacy download pt_core_news_md && \
     python -m spacy link pt_core_news_md pt
+
+# copy files
+COPY . ./
 
 # update permissions & change user to not run as root
 RUN chgrp -R 0 /app && chmod -R g=u /app && \
