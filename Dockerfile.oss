@@ -42,8 +42,6 @@ RUN pip install --no-cache-dir -U pip==20.0.2 && \
 RUN python -m spacy download pt_core_news_md && \
     python -m spacy link pt_core_news_md pt
 
-# copy files
-COPY . ./
 
 # update permissions & change user to not run as root
 RUN chgrp -R 0 /app && chmod -R g=u /app && \
@@ -55,12 +53,19 @@ USER 1001
 # Create a volume for temporary data
 VOLUME /tmp
 
+COPY config.yml ./
+COPY domain.yml ./
+COPY data/ data
+
+RUN rasa train
+
+# copy files
+COPY . ./
+
 # change shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # the entry point
 EXPOSE $PORT
-
-RUN rasa train
 
 CMD ["sh", "-c", "rasa run -p $PORT"]
