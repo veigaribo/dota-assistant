@@ -2,11 +2,11 @@
 
 ## How to run
 
-Due to several dependency version issues, it is strongly recommended to run this using Docker and/or docker-compose.
+Due to several dependency version issues, it is strongly recommended to build this using the included Dockerfile.
 
-In order to run in Docker containers, an environment variable PORT must be provided to each service at startup. See `docker-compose.yml` for more details.
+In order to run in a container, an environment variable PORT must be provided at startup. See `docker-compose.yml` for more details.
 
-### Running without Docker
+### Running manually
 
 If you want to edit the source code, you should have Pipenv installed.
 
